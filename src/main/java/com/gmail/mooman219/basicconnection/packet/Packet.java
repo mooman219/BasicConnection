@@ -19,7 +19,16 @@ public abstract class Packet {
     private static final TObjectByteHashMap<Class<? extends Packet>> ids = new TObjectByteHashMap<>(16, .75f, (byte) 0); // Takes Class<Packet>, returns id
     private static final TByteObjectHashMap<PacketDecoder> decoders = new TByteObjectHashMap<>(); // Takes id, returns decoder
 
-    public static Packet next(byte id, FastInput in) {
+    /**
+     * Reads the incoming data on 'in'. The data is read by the PacketDecoder
+     * associated with the given 'id'.
+     *
+     * @param id the id of the packet that will decode the input.
+     * @param in the input being read.
+     * @return the Packet representing the given id, null if there's an error
+     * while decoding or no PacketDecoder exists for the given 'id'.
+     */
+    public static Packet read(byte id, FastInput in) {
         PacketDecoder decoder = decoders.get(id);
         if (decoder != null) {
             try {
@@ -31,6 +40,14 @@ public abstract class Packet {
         return null;
     }
 
+    /**
+     * Writes Packet 'p' to the output 'out'.
+     *
+     * @param out the output being written to.
+     * @param p the packet being written.
+     * @throws IllegalStateException if the packet being written has not been
+     * registered.
+     */
     public static void send(FastOutput out, Packet p) {
         byte id = ids.get(p.getClass());
         if (id != 0) {
@@ -46,7 +63,15 @@ public abstract class Packet {
         }
     }
 
-    protected static void registerPacket(Class<? extends Packet> packet, PacketDecoder decoder) {
+    /**
+     * Registers a packet. A packet needs to be registered in order to read and
+     * write packets of that type.
+     *
+     * @param packet the packet type being registered.
+     * @param decoder the associated decoder that will be used when reading
+     * packets of given type 'packet'.
+     */
+    public static void registerPacket(Class<? extends Packet> packet, PacketDecoder decoder) {
         byte id = (byte) (packetCount.getAndIncrement() & 0xFF);
         if (decoders.contains(id)) {
             throw new IllegalStateException("Too many packets have been registered. Tried registering " + id);
