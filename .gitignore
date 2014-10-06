@@ -1,0 +1,46 @@
+############
+# NetBeans specific
+############
+
+nbproject/
+nbbuild/
+build/
+dist/
+nbdist/
+manifest.mf
+build.xml
+nbbuild.xml
+nbactions.xml
+nb-configuration.xml
+nb_jr_remoting.cfg
+
+############
+## Maven
+############
+
+target/
+dependency-reduced-pom.xml
+
+############
+# Class Files
+############
+
+*.class
+
+############
+# Package Files
+############
+
+*.jar
+*.war
+*.ear
+
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
