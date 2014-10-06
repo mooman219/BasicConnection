@@ -1,4 +1,4 @@
-package com.gmail.mooman219.framework.central;
+package com.gmail.mooman219.basicconnection;
 
 import java.io.IOException;
 import java.net.ServerSocket;

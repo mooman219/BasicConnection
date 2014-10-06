@@ -1,8 +1,8 @@
-package com.gmail.mooman219.framework.central;
+package com.gmail.mooman219.basicconnection;
 
 import com.esotericsoftware.kryo.io.FastInput;
 import com.esotericsoftware.kryo.io.FastOutput;
-import com.gmail.mooman219.framework.central.packet.Packet;
+import com.gmail.mooman219.basicconnection.packet.Packet;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;

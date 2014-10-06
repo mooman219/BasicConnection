@@ -1,4 +1,4 @@
-package com.gmail.mooman219.framework.central.packet;
+package com.gmail.mooman219.basicconnection.packet;
 
 import com.esotericsoftware.kryo.io.FastInput;
 import com.esotericsoftware.kryo.io.FastOutput;
