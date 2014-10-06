@@ -3,6 +3,7 @@ package com.gmail.mooman219.basicconnection;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,10 +14,12 @@ import java.util.logging.Logger;
 public class ThreadAccept extends Thread {
 
     private final AtomicBoolean running = new AtomicBoolean(false);
+    private final ExecutorService clientPool;
     private final ServerSocket serverSocket;
 
-    public ThreadAccept(ServerSocket serverSocket) {
-        super("FrameworkCentral - Accept");
+    public ThreadAccept(ServerSocket serverSocket, ExecutorService clientPool) {
+        super("BasicConnection - Accept");
+        this.clientPool = clientPool;
         this.serverSocket = serverSocket;
     }
 
